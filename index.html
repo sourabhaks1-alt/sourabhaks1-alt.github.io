@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sourabha Shivamurthy</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Sriracha&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #0d0d0d;
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: #f5f5f5;
+    }
+    
+    .handwritten {
+      font-family: 'Sriracha', cursive;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* Notebook paper effect */
+    .notebook {
+      background: #fafafa;
+      border-radius: 8px;
+      box-shadow: 
+        0 30px 60px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(255,255,255,0.1);
+      padding: 50px;
+      position: relative;
+      color: #1a1a1a;
+      
+      /* Ruled lines */
+      background-image: 
+        linear-gradient(#e8e8e8 1px, transparent 1px);
+      background-size: 100% 36px;
+      background-position: 0 20px;
+    }
+    
+    /* Red margin */
+    .notebook::before {
+      content: '';
+      position: absolute;
+      left: 70px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #ffb3b3;
+      border-radius: 8px 0 0 8px;
+    }
+    
+    /* Hole punches */
+    .holes {
+      position: absolute;
+      left: 25px;
+      top: 50px;
+      bottom: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    
+    .hole {
+      width: 20px;
+      height: 20px;
+      background: #0d0d0d;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+    }
+    
+    .content {
+      margin-left: 40px;
+    }
+    
+    /* Avatar */
+    .avatar {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Typography - READABLE */
+    h1 {
+      font-family: 'Sriracha', cursive;
+      font-size: 42px;
+      color: #1a1a1a;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    
+    h2 {
+      font-family: 'Sriracha', cursive;
+      font-size: 32px;
+      color: #667eea;
+      margin-bottom: 25px;
+    }
+    
+    h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 5px;
+    }
+    
+    p {
+      font-size: 18px;
+      line-height: 32px;
+      color: #333;
+      font-weight: 500;
+    }
+    
+    .subtitle {
+      font-family: 'Sriracha', cursive;
+      font-size: 24px;
+      color: #667eea;
+      text-align: center;
+    }
+    
+    .tagline {
+      font-size: 16px;
+      color: #666;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 30px 0 40px;
+      flex-wrap: wrap;
+    }
+    
+    nav button {
+      background: transparent;
+      border: 2px solid #ddd;
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #555;
+      cursor: pointer;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+    
+    nav button:hover {
+      border-color: #667eea;
+      color: #667eea;
+    }
+    
+    nav button.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: transparent;
+      color: white;
+    }
+    
+    /* Sections */
+    .section { display: none; }
+    .section.active { display: block; animation: fadeIn 0.4s ease; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-left: 4px solid #667eea;
+      transition: all 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    
+    .card.highlight {
+      border-left-color: #f56565;
+      background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+    }
+    
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .company {
+      font-size: 16px;
+      color: #667eea;
+      font-weight: 600;
+    }
+    
+    .date {
+      font-size: 14px;
+      color: #888;
+      background: #f0f0f0;
+      padding: 5px 12px;
+      border-radius: 15px;
+    }
+    
+    .description {
+      font-size: 16px;
+      color: #555;
+      line-height: 28px;
+    }
+    
+    /* Tags */
+    .tags { margin-top: 15px; }
+    
+    .tag {
+      display: inline-block;
+      background: #f0f4ff;
+      color: #667eea;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 4px 4px 4px 0;
+    }
+    
+    .tag.new {
+      background: #fff0f0;
+      color: #e53e3e;
+    }
+    
+    .tag.talk {
+      background: linear-gradient(135deg, #f56565, #ed64a6);
+      color: white;
+    }
+    
+    /* Social */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 25px 0;
+    }
+    
+    .social-links a {
+      width: 45px;
+      height: 45px;
+      border: 2px solid #667eea;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #667eea;
+      text-decoration: none;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background: #667eea;
+      color: white;
+      transform: scale(1.1);
+    }
+    
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+    
+    /* Instagram Card */
+    .insta-card {
+      display: block;
+      max-width: 340px;
+      margin: 30px auto;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    
+    .insta-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    
+    .insta-header {
+      background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: white;
+      padding: 15px 20px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    
+    .insta-body {
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .insta-avatar {
+      width: 55px;
+      height: 55px;
+      background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      padding: 3px;
+    }
+    
+    .insta-avatar span {
+      background: white;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .insta-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1a1a1a;
+    }
+    
+    .insta-role {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .insta-btn {
+      display: block;
+      margin: 0 20px 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    
+    /* CTA Button */
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 15px 40px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.35);
+    }
+    
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(102, 126, 234, 0.45);
+    }
+    
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 2px solid #eee;
+    }
+    
+    footer p {
+      color: #888;
+      font-size: 14px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      body { padding: 20px 10px; }
+      .notebook { padding: 30px 20px; }
+      .notebook::before { left: 20px; }
+      .holes { left: 5px; }
+      .content { margin-left: 15px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 26px; }
+      nav button { padding: 8px 15px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="notebook">
+      <!-- Hole punches -->
+      <div class="holes">
+        <div class="hole"></div>
+        <div class="hole"></div>
+        <div class="hole"></div>
+      </div>
+      
+      <div class="content">
+        <!-- Header -->
+        <header>
+          <div class="avatar">SS</div>
+          <h1>Sourabha Shivamurthy</h1>
+          <p class="subtitle">Software Engineer</p>
+          <p class="tagline">Full-Stack Developer · Mobile Apps · Digital Artist</p>
+          
+          <div class="social-links">
+            <a href="mailto:sourabha.ks1@gmail.com" title="Email">✉</a>
+            <a href="https://www.linkedin.com/in/sourabhaks/" target="_blank" title="LinkedIn">in</a>
+            <a href="https://www.instagram.com/doodlebear.sourabha" target="_blank" title="Instagram">✎</a>
+            <a href="https://github.com/sourabhaks1-alt" target="_blank" title="GitHub">⌘</a>
+          </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav>
+          <button onclick="showSection('about')" class="active">About</button>
+          <button onclick="showSection('experience')">Experience</button>
+          <button onclick="showSection('skills')">Skills</button>
+          <button onclick="showSection('projects')">Projects</button>
+          <button onclick="showSection('doodles')">Doodles</button>
+        </nav>
+
+        <!-- About -->
+        <div id="about" class="section active">
+          <h2>About Me</h2>
+          <p>Hey there! 👋 I'm a Software Engineer with <strong>5+ years of experience</strong> building web applications that people love to use.</p>
+          <p style="margin-top: 15px;">Currently at <strong style="color: #667eea;">i3Verticals</strong>, I develop government licensing systems that serve state departments across the US.</p>
+          <p style="margin-top: 15px;">I hold a Master's in IT from <strong>UT Dallas</strong>. When I'm not coding, you'll find me creating digital illustrations! ✨</p>
+          
+          <div class="tags" style="margin-top: 25px;">
+            <span class="tag">🎓 UT Dallas '23</span>
+            <span class="tag">📍 California</span>
+            <span class="tag">🎨 Creative Coder</span>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div id="experience" class="section">
+          <h2>Experience</h2>
+          
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Software Engineer</h3>
+                <p class="company">i3Verticals (formerly inLumon)</p>
+              </div>
+              <span class="date">2022 - Present</span>
+            </div>
+            <p class="description">Building government licensing systems for state departments</p>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Application Developer</h3>
+                <p class="company">Accenture</p>
+              </div>
+              <span class="date">2021</span>
+            </div>
+            <p class="description">Led and mentored a team of 4 developers</p>
+          </div>
+          
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3>Software Engineer</h3>
+                <p class="company">Tech Mahindra</p>
+              </div>
+              <span class="date">2018 - 2021</span>
+            </div>
+            <p class="description">Full-stack development and RPA automation</p>
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div id="skills" class="section">
+          <h2>Skills</h2>
+          
+          <div class="skills-grid">
+            <div class="card">
+              <h3 style="color: #667eea;">Frontend</h3>
+              <div class="tags">
+                <span class="tag">React</span>
+                <span class="tag">Angular</span>
+                <span class="tag">TypeScript</span>
+                <span class="tag">React Native</span>
+              </div>
+            </div>
+            
+            <div class="card">
+              <h3 style="color: #667eea;">Backend</h3>
+              <div class="tags">
+                <span class="tag">Node.js</span>
+                <span class="tag">Express</span>
+                <span class="tag">REST APIs</span>
+                <span class="tag">GraphQL</span>
+              </div>
+            </div>
+            
+            <div class="card">
+              <h3 style="color: #667eea;">Databases</h3>
+              <div class="tags">
+                <span class="tag">MySQL</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">MongoDB</span>
+              </div>
+            </div>
+            
+            <div class="card">
+              <h3 style="color: #667eea;">Tools</h3>
+              <div class="tags">
+                <span class="tag">Git</span>
+                <span class="tag">Jenkins</span>
+                <span class="tag">AWS</span>
+                <span class="tag">Claude AI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects -->
+        <div id="projects" class="section">
+          <h2>Projects & Talks</h2>
+          
+          <div class="card highlight">
+            <span class="tag talk">🎤 Talk</span>
+            <h3 style="margin-top: 12px;">Chat to Code: Building Mobile Apps with Claude</h3>
+            <p class="description" style="margin-top: 8px;">Delivered a live technical session for engineering students, demonstrating how to build mobile apps using AI-powered development.</p>
+            <div class="tags">
+              <span class="tag">Students</span>
+              <span class="tag">Mobile Dev</span>
+              <span class="tag">Claude AI</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <span class="tag new">✨ New</span>
+            <h3 style="margin-top: 12px;">Client Board Mobile App</h3>
+            <p class="description" style="margin-top: 8px;">Built a mobile app for licensing board clients using AI-powered development.</p>
+            <div class="tags">
+              <span class="tag">React Native</span>
+              <span class="tag">Claude AI</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <span class="tag new">✨ New</span>
+            <h3 style="margin-top: 12px;">2026 Planner App</h3>
+            <p class="description" style="margin-top: 8px;">A personal productivity planner — built as a fun hobby project!</p>
+            <div class="tags">
+              <span class="tag">React Native</span>
+              <span class="tag">UI/UX</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h3>Hungry Comets 🍔</h3>
+            <p class="description" style="margin-top: 8px;">Food delivery app with GraphQL API and real-time order tracking.</p>
+            <div class="tags">
+              <span class="tag">GraphQL</span>
+              <span class="tag">React</span>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h3>SPEAK App 💬</h3>
+            <p class="description" style="margin-top: 8px;">Android AAC device helping people with speech impairments communicate.</p>
+            <div class="tags">
+              <span class="tag">Android</span>
+              <span class="tag">Bluetooth</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doodles -->
+        <div id="doodles" class="section">
+          <h2>My Art Corner</h2>
+          <p>When I'm not coding, I express my creativity through digital art. Follow my illustration journey!</p>
+          
+          <a href="https://www.instagram.com/doodlebear.sourabha" target="_blank" class="insta-card">
+            <div class="insta-header">📸 Instagram</div>
+            <div class="insta-body">
+              <div class="insta-avatar"><span>🐻</span></div>
+              <div>
+                <p class="insta-name">@doodleBear.sourabha</p>
+                <p class="insta-role">Digital Illustrator</p>
+              </div>
+            </div>
+            <div class="insta-btn">View Profile ✨</div>
+          </a>
+          
+          <div style="text-align: center;">
+            <span class="tag">✏️ Digital Art</span>
+            <span class="tag">🎨 Illustrations</span>
+            <span class="tag">🐻 Doodles</span>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+          <h2 style="font-size: 26px; margin-bottom: 20px;">Let's Connect!</h2>
+          <a href="mailto:sourabha.ks1@gmail.com" class="btn">✉ Say Hello</a>
+          <p style="margin-top: 35px;">Made with 💜 by Sourabha · 2025</p>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
