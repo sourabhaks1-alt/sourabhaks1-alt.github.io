@@ -149,27 +149,34 @@
     }
     
     nav button {
-      background: transparent;
-      border: 2px solid #ddd;
+      background: white;
+      border: 2px solid #e0e0e0;
       font-family: 'Nunito', sans-serif;
       font-size: 16px;
       font-weight: 700;
       color: #555;
-      cursor: pointer;
       padding: 10px 20px;
       border-radius: 25px;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
     
     nav button:hover {
-      border-color: #667eea;
-      color: #667eea;
+      background: #f5f5f5;
     }
     
     nav button.active {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      border-color: transparent;
+      background: #1a1a1a;
+      border-color: #1a1a1a;
       color: white;
+    }
+    
+    /* Cartoon yellow pencil with pink eraser cursor - tilted with tip at top */
+    .notebook {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg transform='rotate(-45 16 16)'%3E%3Cpolygon points='14,2 18,2 20,8 12,8' fill='%23F5DEB3'/%3E%3Cpolygon points='15,0 17,0 16,3' fill='%232a2a2a'/%3E%3Crect x='12' y='8' width='8' height='14' fill='%23FFD93D'/%3E%3Crect x='12' y='22' width='8' height='3' fill='%23C0C0C0'/%3E%3Crect x='12' y='25' width='8' height='5' rx='1' fill='%23FFB6C1'/%3E%3C/g%3E%3C/svg%3E") 2 2, auto;
+    }
+    
+    .notebook a, .notebook button {
+      cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cg transform='rotate(-45 16 16)'%3E%3Cpolygon points='14,2 18,2 20,8 12,8' fill='%23F5DEB3'/%3E%3Cpolygon points='15,0 17,0 16,3' fill='%232a2a2a'/%3E%3Crect x='12' y='8' width='8' height='14' fill='%23FFD93D'/%3E%3Crect x='12' y='22' width='8' height='3' fill='%23C0C0C0'/%3E%3Crect x='12' y='25' width='8' height='5' rx='1' fill='%23FFB6C1'/%3E%3C/g%3E%3C/svg%3E") 2 2, pointer;
     }
     
     /* Sections */
@@ -445,6 +452,7 @@
 
         <!-- Navigation -->
         <nav>
+          <p style="width: 100%; text-align: center; font-size: 14px; color: #888; margin-bottom: 12px;">✨ Click to explore ✨</p>
           <button onclick="showSection('about')" class="active">About</button>
           <button onclick="showSection('experience')">Experience</button>
           <button onclick="showSection('skills')">Skills</button>
@@ -453,7 +461,7 @@
         </nav>
 
         <!-- About -->
-        <div id="about" class="section active">
+        <div id="about" class="section active" style="text-align: center;">
           <h2>About Me</h2>
           <p>Hey there! 👋 I'm a Software Engineer with <strong>5+ years of experience</strong> building web applications that people love to use.</p>
           <p style="margin-top: 15px;">Currently at <strong style="color: #667eea;">i3Verticals</strong>, I develop government licensing systems that serve state departments across the US.</p>
